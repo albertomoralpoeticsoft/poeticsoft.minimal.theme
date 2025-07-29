@@ -1,0 +1,59 @@
+
+/**************************************
+  COMMON 
+***************************************
+*/
+
+@use '~commonscss/mixin' as *;
+
+html,
+body {
+
+  padding: 0;
+  margin: 0; 
+  height: 100%;
+  overflow:hidden;
+  -webkit-overflow-scrolling:touch
+}
+
+body {
+  
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+#APP,
+.wp-site-blocks,
+.entry-content.wp-block-post-content {
+
+  @include absolutebox();
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.entry-content.wp-block-post-content {
+
+  @include flexcenter;
+}
+
+.wp-block-site-logo {
+
+  position: absolute;
+}
+
+nav.wp-block-navigation {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#APP { z-index: 0; }
+.wp-site-blocks { z-index: 1; }
+.wp-block-site-logo { z-index: 2; }
+nav.wp-block-navigation { z-index: 3; }

@@ -1,0 +1,13 @@
+@use '~commonscss/mixin' as *;
+
+#Fire {
+
+  @include absolutebox();
+
+  canvas#container {      
+      
+    position: absolute;
+    top: 0; 
+    left: 0;
+  }
+}

@@ -1,0 +1,106 @@
+@use '~commonscss/mixin' as *;
+
+#Dialog {
+
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  width: 90%;
+  max-width: 500px;
+  border: solid var(--color-d);
+  border-width: var(--s05) 0 0 0;
+  border-radius: 0 var(--s2) 0 0 !important;
+
+  > h1 {
+
+    position: absolute;
+    top: -1.05em;
+    z-index: 1;
+    color: var(--color-d);
+  }
+
+  .Slide {
+
+    z-index: 0;
+    width: 100%;
+    border-radius: 0 var(--s2) var(--s) 0 !important;
+    background-color: var(--color-e);
+
+    .wp-block-cover__inner-container {
+
+      height: 100%;
+      padding-bottom: var(--s6) !important;
+    }
+
+    h2, h3 {
+
+      text-shadow: 0 0 1px #000;
+      position: relative;
+
+      a {
+
+        text-shadow: 0 0 1px #000;
+      }    
+    }
+
+    h2 {
+
+      margin-block-end: 0.05em;
+      z-index: 2;  
+    }
+
+    h3 {
+
+      margin-bottom: 0;
+      z-index: 3;
+    }
+
+    p {
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .wp-block-buttons {   
+
+      position: relative;
+      min-height: var(--s6);
+      width: 100%; 
+      z-index: 4;
+      cursor: pointer;
+    }
+  }  
+
+  .wp-block-button.common {
+
+    @include flexcenter();
+    overflow: hidden;
+    border-radius: 50%;
+
+    .wp-block-button__link {
+      
+      text-indent: 2000px;
+      width: var(--s6);
+      height: var(--s6);
+      padding: 0;
+    }
+
+    &.home {
+
+      .wp-block-button__link {
+
+        @include bgimage("~assets/images/home-alt.svg");
+        background-size: 60%;
+      }
+    }
+
+    &.root {
+
+      .wp-block-button__link {
+
+        @include bgimage("~assets/images/arrow-circle.svg");
+        background-size: 60%;
+      }
+    }
+  }
+}

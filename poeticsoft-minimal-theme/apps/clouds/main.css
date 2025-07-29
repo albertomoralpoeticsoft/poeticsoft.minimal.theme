@@ -1,0 +1,25 @@
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/apps/clouds/main.scss ***!
+  \********************************************************************************************************************/
+/**************************************
+  MIXIN 
+***************************************
+*/
+#Clouds {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #326696;
+  background: linear-gradient(356deg, #000763 0%, #326696 100%);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 2.5s;
+  transition-delay: 0.5s;
+}
+#Clouds.Visible {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=main.css.map*/

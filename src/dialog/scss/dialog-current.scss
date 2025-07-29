@@ -1,0 +1,19 @@
+#Dialog {
+
+  &.Calculated { 
+
+    .Slide {
+
+      left: -110%;
+      opacity: 0;
+      transition-property: left, opacity;
+      transition-duration: 0.8s;
+
+      &.Current {  
+           
+        left: 0;
+        opacity: 1;
+      }
+    }
+  }
+}

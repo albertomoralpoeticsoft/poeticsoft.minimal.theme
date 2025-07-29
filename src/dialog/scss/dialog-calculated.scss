@@ -1,0 +1,30 @@
+#Dialog {
+  
+  left: -100%;
+  transition-property: left;
+  transition-duration: 0.8s;
+
+  .Slide {
+
+    visibility: hidden;
+  }
+
+  &.Calculated {    
+    
+    left: 0;
+
+    .Slide {
+
+      position: absolute;
+      top: 0;      
+      left: 0;
+      visibility: visible;
+        
+      .wp-block-buttons { 
+
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,243 @@
+@use '~commonscss/mixin' as *;
+
+#PortfolioWrapper {
+
+  @include absolutebox();
+  background-color: var(--ast-global-color-7);
+  z-index: 100;
+
+  .Portfolio {
+
+    $padding: var(--s2);
+
+    @include absolutebox(
+      $padding,
+      $padding,
+      $padding,
+      $padding 
+    );
+    background-color: var(--ast-global-color-4);
+    display: none;
+
+    .Loading {
+
+      @include absolutebox();
+      display: flex;
+      justify-content: center;
+      align-items: center;  
+    }
+
+    .WP {
+
+      @include absolutebox();
+      overflow: hidden;
+      $titleheight: var(--s6);
+      display: none;
+
+      .Title {
+
+        @include absolutebox();  
+        bottom: auto;
+        height: $titleheight;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--s2);
+        background-color: var(--ast-global-color-6);
+        z-index: 1;
+        box-shadow: 0 0 6px var(--ast-global-color-1);
+
+        .Text {
+
+          flex: 1;
+          color: var(--ast-global-color-1);
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+
+        .Close {
+
+          width: var(--s4);;
+          height: var(--s4);;
+          color: var(--ast-global-color-1);
+          cursor: pointer;
+
+          img {
+
+            width: 100%;
+            display: block;
+          }
+        }
+      }
+
+      .Content {
+
+        @include absolutebox();  
+        top: $titleheight;
+        overflow: auto;
+        padding: var(--s4) 0 0 0;
+        z-index: 0;
+
+        .wp-block-group.Header {
+
+          width: 80%;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        .Files {
+
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+
+          .File {
+
+            width: 50%;
+            padding: 0 0 50% 0;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            @media (min-width: 640px) {
+
+              width: 33.33%;
+              padding: 0 0 33.33% 0;              
+            }
+
+            @media (min-width: 900px) {
+
+              width: 25%;
+              padding: 0 0 25% 0;              
+            }
+
+            @media (min-width: 1200px) {
+
+              width: 20%;
+              padding: 0 0 20% 0;              
+            }
+
+            &:before {
+
+              content: "";
+              @include absolutebox();
+              background-color: var(--ast-global-color-6);
+              z-index: 0;
+
+              opacity: 1;
+  
+              transition-property: opacity;
+              transition-duration: 0.5s;
+            }
+
+            &:after {
+
+              content: "Cargando imagen...";
+              @include absolutebox();
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              z-index: 1;
+
+              opacity: 0.5;
+  
+              transition-property: opacity;
+              transition-duration: 0.5s;
+            }
+
+            img {
+
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translateX(-50%) translateY(-50%);
+              display: block;
+              max-width: none;
+              width: 500%;
+              filter: grayscale(100%);
+              mix-blend-mode: multiply;
+              z-index: 2;
+
+              opacity: 0;
+  
+              transition-property: opacity, width, filter;
+              transition-duration: 0.5s;
+            }            
+              
+            &:hover {             
+
+              &:before {
+              
+                opacity: 0;
+              }
+
+              img {
+
+                filter: grayscale(0%);
+                width: 300%;
+              }
+            }              
+
+            &.Loaded { 
+                
+              img {
+              
+                opacity: 1;
+              }
+
+              &:after {
+              
+                opacity: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#ImageViewerWrapper {
+
+  @include absolutebox();
+  z-index: 101;
+  background-color: var(--ast-global-color-4);
+  display: none;
+
+  #Images {    
+
+    @include absolutebox();
+    z-index: 0;
+    opacity: 0;
+
+    > img {
+
+      vertical-align: auto;
+      max-width: none;
+    }
+  }  
+
+  .viewer-container {
+
+    z-index: 1 !important;
+  }
+
+  .Close {
+
+    position: absolute;
+    top: var(--s2);
+    right: var(--s2);
+    width: var(--s4);
+    height: var(--s4);
+    color: var(--ast-global-color-1);
+    cursor: pointer;
+    z-index: 1;
+
+    img {
+
+      width: 100%;
+      display: block;
+    }
+  }
+}

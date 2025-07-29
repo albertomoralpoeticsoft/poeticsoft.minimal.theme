@@ -1,0 +1,26 @@
+@use '~commonscss/mixin' as *;
+
+#Blur {
+
+  @include absolutebox();
+  background-color: var(--color-a); 
+
+  canvas {      
+      
+    position: absolute;
+    top: 0; 
+    left: 0;
+  
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+  }
+
+  &.Visible {
+
+    canvas {
+      
+      opacity: 1;
+    }
+  }
+}

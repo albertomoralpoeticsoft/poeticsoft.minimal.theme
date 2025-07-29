@@ -1,0 +1,18 @@
+@use '~commonscss/mixin' as *;
+
+#Rain {
+
+  @include absolutebox();
+
+  .videobg {
+
+    @include absolutebox();
+  }
+
+  canvas#container {      
+      
+    position: absolute;
+    top: 0; 
+    left: 0;
+  }
+}

@@ -1,0 +1,11 @@
+@use '~commonscss/mixin' as *;
+
+#Clouds {
+
+  @include absolutebox();
+  
+  #container {
+
+    @include absolutebox();
+  }
+}

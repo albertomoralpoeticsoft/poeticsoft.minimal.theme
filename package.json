@@ -1,0 +1,75 @@
+{
+  "name": "playmotiv-cloud",
+  "version": "0.0.0",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    
+    "admindev": "webpack --env=admin-dev",
+    "adminprod": "webpack --env=admin-prod",
+    
+    "themedev": "webpack --env=theme-dev",
+    "themeprod": "webpack --env=theme-prod",
+
+    "portfoliodev": "webpack --env=portfolio-dev",
+    "portfolioprod": "webpack --env=portfolio-prod",
+    
+    "dialogdev": "webpack --env=dialog-dev",
+    "dialogprod": "webpack --env=dialog-prod",
+
+    "cloudsdev": "webpack --env=apps-clouds-dev",
+    "cloudsprod": "webpack --env=apps-clouds-prod",
+    "raindev": "webpack --env=apps-rain-dev",
+    "rainprod": "webpack --env=apps-rain-prod",
+    "firedev": "webpack --env=apps-fire-dev",
+    "fireprod": "webpack --env=apps-fire-prod",
+    "blurdev": "webpack --env=apps-blur-dev",
+    "blurprod": "webpack --env=apps-blur-prod",
+    "clouds2dev": "webpack --env=apps-clouds2-dev",
+    "clouds2prod": "webpack --env=apps-clouds2-prod",
+    "rain2dev": "webpack --env=apps-rain2-dev",
+    "rain2prod": "webpack --env=apps-rain2-prod",
+    "halodev": "webpack --env=apps-halo-dev",
+    "haloprod": "webpack --env=apps-halo-prod",
+    
+    "editorformatsdev": "webpack --env=editor-formats-dev",
+    "editorformatsprod": "webpack --env=editor-formats-prod"
+  },
+  "dependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/runtime": "^7.18.9",
+    "@react-spring/web": "^9.7.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "glslify": "^7.1.1",
+    "gsap": "^3.12.7",
+    "immutable-update": "^1.0.0",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.468.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.54.2",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "three": "^0.172.0",
+    "viewerjs": "^1.11.7"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^6.0.1"
+  }
+}

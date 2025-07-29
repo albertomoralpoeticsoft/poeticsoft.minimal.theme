@@ -1,0 +1,28 @@
+/*!******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/apps/blur/main.scss ***!
+  \******************************************************************************************************************/
+/**************************************
+  MIXIN 
+***************************************
+*/
+#Blur {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-a);
+}
+#Blur canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.8s;
+}
+#Blur.Visible canvas {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=main.css.map*/
