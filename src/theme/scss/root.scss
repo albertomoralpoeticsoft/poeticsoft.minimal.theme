@@ -25,4 +25,17 @@
   --s8: calc(var(--space) * 8);
   --s9: calc(var(--space) * 9);
   --s10: calc(var(--space) * 10);
+
+  --widesize: var(--wp--style--global--wide-size);
+  --contentsize: var(--wp--style--global--content-size);
+  --margin: var(--s4);
+
+  --color-a: var(--wp--preset--color--black);
+  --color-b: var(--wp--preset--color--gris);
+  --color-c: var(--wp--preset--color--blanco);
+  --color-d: var(--wp--preset--color--naranja-a);
+  --color-e: var(--wp--preset--color--naranja-b);
+  --color-f: var(--wp--preset--color--blanco-transparente-a);
+  --color-g: var(--wp--preset--color--negro-transparente-a);
 }
+

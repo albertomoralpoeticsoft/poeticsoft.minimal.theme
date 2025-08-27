@@ -16,7 +16,6 @@
     position: absolute;
     top: -1.05em;
     z-index: 1;
-    color: var(--color-d);
   }
 
   .Slide {
@@ -24,7 +23,7 @@
     z-index: 0;
     width: 100%;
     border-radius: 0 var(--s2) var(--s) 0 !important;
-    background-color: var(--color-e);
+    background-color: var(--color-f);
 
     .wp-block-cover__inner-container {
 
@@ -34,25 +33,24 @@
 
     h2, h3 {
 
-      text-shadow: 0 0 1px #000;
       position: relative;
 
-      a {
-
-        text-shadow: 0 0 1px #000;
-      }    
     }
 
     h2 {
-
-      margin-block-end: 0.05em;
+      
+      margin-block-start: 0;
+      margin-block-end: 0;
       z-index: 2;  
     }
 
     h3 {
-
-      margin-bottom: 0;
+      
+      margin-block-start: calc(-1 * var(--s05));
+      margin-block-end: var(--s3);
+      line-height: 0;
       z-index: 3;
+      padding-left: var(--s);
     }
 
     p {
@@ -73,7 +71,7 @@
 
   .wp-block-button.common {
 
-    @include flexcenter();
+    @include flexrowcenter();
     overflow: hidden;
     border-radius: 50%;
 

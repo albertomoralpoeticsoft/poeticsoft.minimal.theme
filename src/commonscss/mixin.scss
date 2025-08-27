@@ -33,9 +33,17 @@
   background-repeat: no-repeat;
 }
 
-@mixin flexcenter() {
+@mixin flexrowcenter() {
 
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexcolumncenter() {
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

@@ -1,3 +1,22 @@
 {
-  "version": 2
+  "styles": {
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "100%"
+    }
+  },
+  "settings": {    
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "100%"
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "units": [ "px", "em", "rem", "%" ],
+      "blockGap": true
+    }  
+  },
+  "isGlobalStylesUserThemeJSON": true,
+  "version": 3
 }

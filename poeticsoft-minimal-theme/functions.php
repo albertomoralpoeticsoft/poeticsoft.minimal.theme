@@ -50,6 +50,6 @@ add_action(
   2
 );
 
-require_once(dirname(__FILE__) . '/admin/main.php'); 
+require_once(dirname(__FILE__) . '/api/main.php'); 
 require_once(dirname(__FILE__) . '/setup/main.php');
-require_once(dirname(__FILE__) . '/apps/main.php');
+require_once(dirname(__FILE__) . '/apps/main.php'); 

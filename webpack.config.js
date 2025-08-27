@@ -22,6 +22,7 @@ module.exports = env => {
   switch(type) {
 
     case 'apps':
+    case 'editor':
 
       unit = params[1] || 'clouds' // clouds | rain | fire | 
       mode = params[2] || 'dev' // dev | prod

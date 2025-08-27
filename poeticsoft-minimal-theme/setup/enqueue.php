@@ -21,6 +21,35 @@ add_action(
       filemtime(get_stylesheet_directory() . '/admin/main.css'),
       'all' 
     );
+
+    /* Editor controls
+
+    wp_enqueue_script(
+      'poeticsoft-theme-editor-controls', 
+      $url . '/editor/controls/main.js',
+      [
+        'wp-blocks', 
+        'wp-edit-post', 
+        'wp-hooks', 
+        'wp-element', 
+        'wp-i18n', 
+        'wp-components', 
+        'wp-data', 
+        'wp-compose'
+      ], 
+      filemtime(get_stylesheet_directory() . '/editor/controls/main.js'),
+      true
+    );
+
+    wp_enqueue_style( 
+      'poeticsoft-theme-editor-controls',
+      $url . '/editor/controls/main.css', 
+      [], 
+      filemtime(get_stylesheet_directory() . '/editor/controls/main.css'),
+      'all' 
+    ); 
+    
+    */
 	}, 
 	15 
 );

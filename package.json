@@ -32,7 +32,10 @@
     "haloprod": "webpack --env=apps-halo-prod",
     
     "editorformatsdev": "webpack --env=editor-formats-dev",
-    "editorformatsprod": "webpack --env=editor-formats-prod"
+    "editorformatsprod": "webpack --env=editor-formats-prod",
+
+    "editorcontrolsdev": "webpack --env=editor-controls-dev",
+    "editorcontrolsprod": "webpack --env=editor-controls-prod"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",
