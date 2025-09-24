@@ -29,13 +29,7 @@
     "rain2dev": "webpack --env=apps-rain2-dev",
     "rain2prod": "webpack --env=apps-rain2-prod",
     "halodev": "webpack --env=apps-halo-dev",
-    "haloprod": "webpack --env=apps-halo-prod",
-    
-    "editorformatsdev": "webpack --env=editor-formats-dev",
-    "editorformatsprod": "webpack --env=editor-formats-prod",
-
-    "editorcontrolsdev": "webpack --env=editor-controls-dev",
-    "editorcontrolsprod": "webpack --env=editor-controls-prod"
+    "haloprod": "webpack --env=apps-halo-prod"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",

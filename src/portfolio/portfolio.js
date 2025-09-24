@@ -1,8 +1,9 @@
 import Viewer from 'viewerjs'
+import getpage from './cachepage'
 
 import arrowcircle from 'assets/images/arrow-circle.svg'
 
-export default ($, url) => {
+export default ($, href) => {
  
   $('body')
   .append(`
@@ -15,8 +16,8 @@ export default ($, url) => {
         </div>
         <div class="WP">
           <div class="Title">
-            <div class="Text">
-            </div>
+            <div class="Icon"></div>
+            <div class="Text"></div>
             <div class="Close">
               <svg viewBox="0 0 24 24">
                 <path 
@@ -49,6 +50,7 @@ export default ($, url) => {
   const $loading = $portfolio.find('.Loading')
   const $wp = $portfolio.find('.WP')
   const $title = $wp.find('.Title')
+  const $titleicon = $title.find('.Icon')
   const $titletext = $title.find('.Text')
   const $close = $title.find('.Close')
   const $content = $wp.find('.Content')
@@ -73,119 +75,98 @@ export default ($, url) => {
   .fadeIn(
     500,
     () => {      
-      
-      // TO DO Cache page
 
-      fetch(
-        '/wp-json/poeticsoft/page',
-        {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            url: url
+      const url = href.replace('#', '')      
+      getpage(url)
+      .then(page => {
+
+        $titleicon.html('<img src="' + page.icon + '" />')
+        $titletext.html(page.title)
+        $content.html(page.content) 
+
+        const $images = $content.find('.File img')
+        if($images.length) {   
+          
+          let imagesdom = `<ul id="Images">`
+          $images.each(function() {
+
+            imagesdom += `<li><img src="${ $(this).attr('src') }" /></li>`
           })
-        }
-      )
-      .then(response => {
-    
-        if(response.status == 200) {
-    
-          response.json()
-          .then(post => {
+          imagesdom += `</ul>`
+          
+          $images.each(function(index) {
 
-            $titletext.html(post.title);
-            $content.html(post.content) 
-
-            const $images = $content.find('.File img')
-            if($images.length) {   
-              
-              let imagesdom = `<ul id="Images">`
-              $images.each(function() {
-
-                imagesdom += `<li><img src="${ $(this).attr('src') }" /></li>`
-              })
-              imagesdom += `</ul>`
-              
-              $images.each(function(index) {
+            $(this)
+            .on(
+              'load',
+              function(){
 
                 $(this)
-                .on(
-                  'load',
-                  function(){
+                .parent('.File')
+                .addClass('Loaded')
+              }
+            )
+            .on(
+              'click',
+              function(e) {
 
-                    $(this)
-                    .parent('.File')
-                    .addClass('Loaded')
-                  }
-                )
-                .on(
-                  'click',
-                  function(e) {
+                const src = $(this).attr('src')
 
-                    const src = $(this).attr('src')
+                $('body')
+                .append(`
+                  <div id="ImageViewerWrapper">
+                    ${ imagesdom }
+                  </div>
+                `)
 
-                    $('body')
-                    .append(`
-                      <div id="ImageViewerWrapper">
-                        ${ imagesdom }
-                      </div>
-                    `)
+                const $imageviewerwrapper = $('#ImageViewerWrapper')
+                const $images = $imageviewerwrapper.find('#Images')
 
-                    const $imageviewerwrapper = $('#ImageViewerWrapper')
-                    const $images = $imageviewerwrapper.find('#Images')
+                $imageviewerwrapper
+                .fadeIn(
+                  500,
+                  function() {
 
-                    $imageviewerwrapper
-                    .fadeIn(
-                      500,
-                      function() {
+                    const gallery = new Viewer(
+                      $images[0],
+                      {
+                        backdrop: false,
+                        toolbar: false,
+                        title: false,
+                        // navbar: false,
+                        container: $imageviewerwrapper[0],
+                        hidden: () => {
 
-                        const gallery = new Viewer(
-                          $images[0],
-                          {
-                            backdrop: false,
-                            toolbar: false,
-                            title: false,
-                            // navbar: false,
-                            container: $imageviewerwrapper[0],
-                            hidden: () => {
+                          $imageviewerwrapper
+                          .fadeOut(
+                            500,
+                            function() {
 
-                              $imageviewerwrapper
-                              .fadeOut(
-                                500,
-                                function() {
-
-                                  $imageviewerwrapper.remove()
-                                }
-                              )
+                              $imageviewerwrapper.remove()
                             }
-                          }
-                        )
-                        
-                        gallery.view(index)
+                          )
+                        }
                       }
                     )
-
-                    return false;
+                    
+                    gallery.view(index)
                   }
                 )
-              })
-            }
 
-            $loading.fadeOut()
-            $wp.fadeIn()
+                return false;
+              }
+            )
           })
-    
-        } else {
-    
-          console.log('Fetch error')
         }
+
+        $loading.fadeOut()
+        $wp.fadeIn()
+
+
       })
       .catch(error => {
-    
-        console.log(error)
+
+        $loading.html(JSON.stringify(error))
       })
     }
   )  

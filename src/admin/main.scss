@@ -1,8 +1,7 @@
-.editor-editor-interface 
-.interface-interface-skeleton__content 
-.editor-visual-editor {
+@use '~commonscss/main';
 
-  // width: 90%;
-  // max-width: 600px;
-  // margin: 0 auto;
+.editor-styles-wrapper {
+
+  background-color: #ececec;
+  background-image: url("~assets/images/admin-bg-a.png");
 }

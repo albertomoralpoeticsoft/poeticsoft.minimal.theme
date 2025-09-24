@@ -14,27 +14,6 @@ function theme_log($display) {
   );
 }
 
-add_filter( 'styles_inline_size_limit', '__return_zero' );
-add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
-
-// add_action(
-//   'wp_enqueue_scripts', 
-//   function () {
-
-//     wp_dequeue_style('global-styles');
-//     wp_dequeue_style('core-block-supports');
-//   }, 
-//   100 
-// );
-
-add_action( 
-  'after_setup_theme', 
-  function () {
-    
-    remove_action('wp_footer', 'the_block_template_skip_link');
-  } 
-);
-
 
 add_action(
   'wp_head', 
@@ -50,6 +29,6 @@ add_action(
   2
 );
 
-require_once(dirname(__FILE__) . '/api/main.php'); 
 require_once(dirname(__FILE__) . '/setup/main.php');
 require_once(dirname(__FILE__) . '/apps/main.php'); 
+require_once(dirname(__FILE__) . '/api/main.php'); 

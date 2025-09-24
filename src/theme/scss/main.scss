@@ -1,0 +1,42 @@
+@use '~commonscss/mixin' as *;
+
+html,
+body {
+
+  padding: 0;
+  margin: 0; 
+  height: 100%;
+  overflow:hidden;
+  -webkit-overflow-scrolling:touch
+}
+
+body {
+  
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#APP,
+.wp-site-blocks { 
+
+  @include absolutebox();
+  padding: 0;
+  margin: 0;
+}
+
+#APP { 
+  
+  z-index: 0; 
+}
+
+.wp-site-blocks {
+  
+  overflow: auto;
+  z-index: 1; 
+}
+
+.entry-content.wp-block-post-content {
+
+  overflow: auto;
+
+}

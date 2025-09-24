@@ -61,7 +61,6 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border-radius: 50%;
 }
 #Dialog .wp-block-button.common .wp-block-button__link {
   text-indent: 2000px;

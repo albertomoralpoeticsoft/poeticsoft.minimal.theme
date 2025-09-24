@@ -4,56 +4,41 @@
  * Apps
  */
 
-$pageapps = [
-  'home' => 'clouds',
-  'wordpress' => 'rain2',
-  'react' => 'fire',
-  'gamificacion' => 'blur',
-  'interaccion' => 'halo'
-];
-
-if(isset($_GET['app'])) { // ?app=local
-
-  $url = 'http://localhost:8090'; 
-
-} else {
-
-  $url = get_stylesheet_directory_uri();
-}
-
 add_action( 
 	'wp_enqueue_scripts', 
-	function () use ($pageapps, $url) {
+	function () {
 
     global $post;
 
+    $pageapps = [
+      'clouds',
+      'rain2',
+      'fire',
+      'blur',
+      'halo'
+    ];
+
     if(null != $post) {
+      
+      $appname = $pageapps[rand(0, count($pageapps) - 1)];
+      // $appname = $pageapps[0];
 
-      $post_slug = $post->post_name;
+      wp_enqueue_script(
+        'poeticsoft-theme-app-' . $appname, 
+        get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.js',
+        [], 
+        filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.js'),
+        true
+      );
 
-      if(isset($pageapps[$post_slug])) {
-
-        $appname = $pageapps[$post_slug];
-
-        // Apps
-
-        wp_enqueue_script(
-          'poeticsoft-theme-app-' . $appname, 
-          $url . '/apps/' . $appname . '/main.js',
-          [], 
-          filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.js'),
-          true
-        );
-    
-        wp_enqueue_style( 
-          'poeticsoft-theme-app-' . $appname,
-          $url . '/apps/' . $appname . '/main.css', 
-          [], 
-          filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.css'),
-          'all' 
-        );
-      }
-    } 
-	}, 
+      wp_enqueue_style( 
+        'poeticsoft-theme-app-' . $appname,
+        get_stylesheet_directory_uri() . '/apps/' . $appname . '/main.css', 
+        [], 
+        filemtime(get_stylesheet_directory() . '/apps/' . $appname . '/main.css'),
+        'all' 
+      );
+    }  
+  }, 
 	999 
 );

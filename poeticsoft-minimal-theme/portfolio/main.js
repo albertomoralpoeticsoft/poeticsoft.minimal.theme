@@ -3249,6 +3249,47 @@ module.exports = __webpack_require__.p + "/assets/images/arrow-circle.svg";
 
 /***/ }),
 
+/***/ "./src/portfolio/cachepage.js":
+/*!************************************!*\
+  !*** ./src/portfolio/cachepage.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var pages = {};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (url) {
+  return new Promise(function (resolve, reject) {
+    if (pages[url]) {
+      return resolve(pages[url]);
+    }
+    fetch('/wp-json/minimaltheme/page', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        url: url
+      })
+    }).then(function (response) {
+      if (response.status == 200) {
+        response.json().then(function (post) {
+          pages[url] = post;
+          resolve(post);
+        });
+      }
+    })["catch"](function (error) {
+      reject(error);
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./src/portfolio/main.scss":
 /*!*********************************!*\
   !*** ./src/portfolio/main.scss ***!
@@ -3275,16 +3316,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var viewerjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! viewerjs */ "./node_modules/viewerjs/dist/viewer.js");
 /* harmony import */ var viewerjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(viewerjs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var assets_images_arrow_circle_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! assets/images/arrow-circle.svg */ "./poeticsoft-minimal-theme/assets/images/arrow-circle.svg");
+/* harmony import */ var _cachepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cachepage */ "./src/portfolio/cachepage.js");
+/* harmony import */ var assets_images_arrow_circle_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! assets/images/arrow-circle.svg */ "./poeticsoft-minimal-theme/assets/images/arrow-circle.svg");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($, url) {
-  $('body').append("\n    <div id=\"PortfolioWrapper\">\n      <div class=\"Portfolio\">\n        <div class=\"Loading\">\n          <h4>\n            Cargando portfolio...\n          </h4>\n        </div>\n        <div class=\"WP\">\n          <div class=\"Title\">\n            <div class=\"Text\">\n            </div>\n            <div class=\"Close\">\n              <svg viewBox=\"0 0 24 24\">\n                <path \n                  fill=\"currentColor\" \n                  d=\"M8,19a3,3,0,0,1-3-3V8A3,3,0,0,1,8,5,1,\n                     1,0,0,0,8,3,5,5,0,0,0,3,8v8a5,5,0,0,0,\n                     5,5,1,1,0,0,0,0-2Zm7.71-3.29a1,1,0,0,\n                     0,0-1.42L13.41,12l2.3-2.29a1,1,0,0,\n                     0-1.42-1.42L12,10.59,9.71,8.29A1,1,\n                     0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,\n                     1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,\n                     13.41l2.29,2.3a1,1,0,0,0,1.42,0ZM16,\n                     3a1,1,0,0,0,0,2,3,3,0,0,1,3,3v8a3,3,\n                     0,0,1-3,3,1,1,0,0,0,0,2,5,5,0,0,0,\n                     5-5V8A5,5,0,0,0,16,3Z\"\n                />\n              </svg>\n            </div>\n          </div>\n          <div class=\"Content\">\n          </div>\n      </div>\n    </div>\n  ");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function ($, href) {
+  $('body').append("\n    <div id=\"PortfolioWrapper\">\n      <div class=\"Portfolio\">\n        <div class=\"Loading\">\n          <h4>\n            Cargando portfolio...\n          </h4>\n        </div>\n        <div class=\"WP\">\n          <div class=\"Title\">\n            <div class=\"Icon\"></div>\n            <div class=\"Text\"></div>\n            <div class=\"Close\">\n              <svg viewBox=\"0 0 24 24\">\n                <path \n                  fill=\"currentColor\" \n                  d=\"M8,19a3,3,0,0,1-3-3V8A3,3,0,0,1,8,5,1,\n                     1,0,0,0,8,3,5,5,0,0,0,3,8v8a5,5,0,0,0,\n                     5,5,1,1,0,0,0,0-2Zm7.71-3.29a1,1,0,0,\n                     0,0-1.42L13.41,12l2.3-2.29a1,1,0,0,\n                     0-1.42-1.42L12,10.59,9.71,8.29A1,1,\n                     0,0,0,8.29,9.71L10.59,12l-2.3,2.29a1,\n                     1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,\n                     13.41l2.29,2.3a1,1,0,0,0,1.42,0ZM16,\n                     3a1,1,0,0,0,0,2,3,3,0,0,1,3,3v8a3,3,\n                     0,0,1-3,3,1,1,0,0,0,0,2,5,5,0,0,0,\n                     5-5V8A5,5,0,0,0,16,3Z\"\n                />\n              </svg>\n            </div>\n          </div>\n          <div class=\"Content\">\n          </div>\n      </div>\n    </div>\n  ");
   var $portfoliowrapper = $('body').find('#PortfolioWrapper').eq(0);
   var $portfolio = $portfoliowrapper.find('.Portfolio');
   var $loading = $portfolio.find('.Loading');
   var $wp = $portfolio.find('.WP');
   var $title = $wp.find('.Title');
+  var $titleicon = $title.find('.Icon');
   var $titletext = $title.find('.Text');
   var $close = $title.find('.Close');
   var $content = $wp.find('.Content');
@@ -3294,64 +3338,49 @@ __webpack_require__.r(__webpack_exports__);
     });
   });
   $portfolio.fadeIn(500, function () {
-    // TO DO Cache page
-
-    fetch('/wp-json/poeticsoft/page', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        url: url
-      })
-    }).then(function (response) {
-      if (response.status == 200) {
-        response.json().then(function (post) {
-          $titletext.html(post.title);
-          $content.html(post.content);
-          var $images = $content.find('.File img');
-          if ($images.length) {
-            var imagesdom = "<ul id=\"Images\">";
-            $images.each(function () {
-              imagesdom += "<li><img src=\"".concat($(this).attr('src'), "\" /></li>");
-            });
-            imagesdom += "</ul>";
-            $images.each(function (index) {
-              $(this).on('load', function () {
-                $(this).parent('.File').addClass('Loaded');
-              }).on('click', function (e) {
-                var src = $(this).attr('src');
-                $('body').append("\n                      <div id=\"ImageViewerWrapper\">\n                        ".concat(imagesdom, "\n                      </div>\n                    "));
-                var $imageviewerwrapper = $('#ImageViewerWrapper');
-                var $images = $imageviewerwrapper.find('#Images');
-                $imageviewerwrapper.fadeIn(500, function () {
-                  var gallery = new (viewerjs__WEBPACK_IMPORTED_MODULE_0___default())($images[0], {
-                    backdrop: false,
-                    toolbar: false,
-                    title: false,
-                    // navbar: false,
-                    container: $imageviewerwrapper[0],
-                    hidden: function hidden() {
-                      $imageviewerwrapper.fadeOut(500, function () {
-                        $imageviewerwrapper.remove();
-                      });
-                    }
-                  });
-                  gallery.view(index);
-                });
-                return false;
-              });
-            });
-          }
-          $loading.fadeOut();
-          $wp.fadeIn();
+    var url = href.replace('#', '');
+    (0,_cachepage__WEBPACK_IMPORTED_MODULE_1__["default"])(url).then(function (page) {
+      $titleicon.html('<img src="' + page.icon + '" />');
+      $titletext.html(page.title);
+      $content.html(page.content);
+      var $images = $content.find('.File img');
+      if ($images.length) {
+        var imagesdom = "<ul id=\"Images\">";
+        $images.each(function () {
+          imagesdom += "<li><img src=\"".concat($(this).attr('src'), "\" /></li>");
         });
-      } else {
-        console.log('Fetch error');
+        imagesdom += "</ul>";
+        $images.each(function (index) {
+          $(this).on('load', function () {
+            $(this).parent('.File').addClass('Loaded');
+          }).on('click', function (e) {
+            var src = $(this).attr('src');
+            $('body').append("\n                  <div id=\"ImageViewerWrapper\">\n                    ".concat(imagesdom, "\n                  </div>\n                "));
+            var $imageviewerwrapper = $('#ImageViewerWrapper');
+            var $images = $imageviewerwrapper.find('#Images');
+            $imageviewerwrapper.fadeIn(500, function () {
+              var gallery = new (viewerjs__WEBPACK_IMPORTED_MODULE_0___default())($images[0], {
+                backdrop: false,
+                toolbar: false,
+                title: false,
+                // navbar: false,
+                container: $imageviewerwrapper[0],
+                hidden: function hidden() {
+                  $imageviewerwrapper.fadeOut(500, function () {
+                    $imageviewerwrapper.remove();
+                  });
+                }
+              });
+              gallery.view(index);
+            });
+            return false;
+          });
+        });
       }
+      $loading.fadeOut();
+      $wp.fadeIn();
     })["catch"](function (error) {
-      console.log(error);
+      $loading.html(JSON.stringify(error));
     });
   });
 });
@@ -3444,12 +3473,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (function ($) {
-  var $portfoliolinks = $('a.portfolio');
+  var $portfoliolinks = $('a[href^="#portfolio"]');
   if ($portfoliolinks.length) {
     $portfoliolinks.on('click', function () {
       var $link = $(this);
-      var url = $link.attr('href');
-      (0,_portfolio__WEBPACK_IMPORTED_MODULE_0__["default"])($, url);
+      var href = $link.attr('href');
+      (0,_portfolio__WEBPACK_IMPORTED_MODULE_0__["default"])($, href);
       return false;
     });
   }

@@ -4,11 +4,9 @@ add_action(
 	'admin_enqueue_scripts', 
 	function () {
 
-    $url = get_stylesheet_directory_uri();
-
     wp_enqueue_script(
       'poeticsoft-theme-admin', 
-      $url . '/admin/main.js',
+      get_stylesheet_directory_uri() . '/admin/main.js',
       [], 
       filemtime(get_stylesheet_directory() . '/admin/main.js'),
       true
@@ -16,7 +14,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-admin',
-      $url . '/admin/main.css', 
+      get_stylesheet_directory_uri() . '/admin/main.css', 
       [], 
       filemtime(get_stylesheet_directory() . '/admin/main.css'),
       'all' 
@@ -26,7 +24,7 @@ add_action(
 
     wp_enqueue_script(
       'poeticsoft-theme-editor-controls', 
-      $url . '/editor/controls/main.js',
+      get_stylesheet_directory_uri() . '/editor/controls/main.js',
       [
         'wp-blocks', 
         'wp-edit-post', 
@@ -43,7 +41,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-editor-controls',
-      $url . '/editor/controls/main.css', 
+      get_stylesheet_directory_uri() . '/editor/controls/main.css', 
       [], 
       filemtime(get_stylesheet_directory() . '/editor/controls/main.css'),
       'all' 
@@ -58,20 +56,11 @@ add_action(
 	'wp_enqueue_scripts', 
 	function () {
 
-    if(isset($_GET['app'])) { // ?app=local
-
-      $url = 'http://localhost:8090'; 
-
-    } else {
-
-      $url = get_stylesheet_directory_uri();
-    }
-
     // Theme
 
     wp_enqueue_script(
       'poeticsoft-theme-theme', 
-      $url . '/theme/main.js',
+      get_stylesheet_directory_uri() . '/theme/main.js',
       [], 
       filemtime(get_stylesheet_directory() . '/theme/main.js'),
       true
@@ -79,7 +68,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-theme',
-      $url . '/theme/main.css', 
+      get_stylesheet_directory_uri() . '/theme/main.css', 
       [], 
       filemtime(get_stylesheet_directory() . '/theme/main.css'),
       'all' 
@@ -89,7 +78,7 @@ add_action(
 
     wp_enqueue_script(
       'poeticsoft-theme-dialog', 
-      $url . '/dialog/main.js',
+      get_stylesheet_directory_uri() . '/dialog/main.js',
       ['jquery'], 
       filemtime(get_stylesheet_directory() . '/dialog/main.js'),
       true
@@ -97,7 +86,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-dialog',
-      $url . '/dialog/main.css', 
+      get_stylesheet_directory_uri() . '/dialog/main.css', 
       [], 
       filemtime(get_stylesheet_directory() . '/dialog/main.css'),
       'all' 
@@ -107,7 +96,7 @@ add_action(
 
     wp_enqueue_script(
       'poeticsoft-theme-portfolio', 
-      $url . '/portfolio/main.js',
+      get_stylesheet_directory_uri() . '/portfolio/main.js',
       [
         'jquery',
         'jquery-ui-core',
@@ -120,7 +109,7 @@ add_action(
 
     wp_enqueue_style( 
       'poeticsoft-theme-portfolio',
-      $url . '/portfolio/main.css', 
+      get_stylesheet_directory_uri() . '/portfolio/main.css', 
       [], 
       filemtime(get_stylesheet_directory() . '/portfolio/main.css'),
       'all' 

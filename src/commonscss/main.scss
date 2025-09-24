@@ -1,0 +1,53 @@
+@use './mixin' as *;
+@use './root';
+
+.wp-block-cover {
+  
+  &.wheight {
+
+    height: 100vh;
+
+    .wp-block-cover__inner-container {
+
+      height: 100%
+    }
+  }
+
+  &.hextend {
+
+    height: 100%;
+
+    .wp-block-cover__inner-container {
+
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .flexuno {
+
+        flex: 1;
+      }
+
+      .wp-block-image.clampwidth {
+
+        img {
+          
+          width: clamp(170px, 40vw, 300px) !important;
+        }
+      }
+
+      .wp-block-image.vertcenter {
+
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+strong {
+
+  font-weight: 700;
+}

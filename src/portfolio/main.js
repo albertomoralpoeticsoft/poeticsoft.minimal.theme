@@ -3,7 +3,7 @@ import './main.scss'
 
 (function ($) {
 
-  const $portfoliolinks = $('a.portfolio')
+  const $portfoliolinks = $('a[href^="#portfolio"]')
 
   if($portfoliolinks.length) {
 
@@ -13,9 +13,9 @@ import './main.scss'
       function() {
 
         const $link = $(this)
-        const url = $link.attr('href')
+        const href = $link.attr('href')
 
-        portfolio($, url)
+        portfolio($, href)
 
         return false
       }

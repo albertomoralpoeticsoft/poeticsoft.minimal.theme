@@ -455,22 +455,82 @@
   MIXIN 
 ***************************************
 */
+/**************************************
+  ROOT 
+***************************************
+*/
+:root {
+  /* SIZES */
+  --space: 8px;
+  --s025: calc(var(--space) * 0.25);
+  --s05: calc(var(--space) * 0.5);
+  --s075: calc(var(--space) * 0.75);
+  --s: var(--space);
+  --s15: calc(var(--space) * 1.5);
+  --s2: calc(var(--space) * 2);
+  --s3: calc(var(--space) * 3);
+  --s4: calc(var(--space) * 4);
+  --s5: calc(var(--space) * 5);
+  --s6: calc(var(--space) * 6);
+  --s7: calc(var(--space) * 7);
+  --s8: calc(var(--space) * 8);
+  --s9: calc(var(--space) * 9);
+  --s10: calc(var(--space) * 10);
+  --color-naranja: var(--wp--preset--color--naranja);
+  --color-negro: var(--wp--preset--color--negro);
+  --color-gris-oscuro: var(--wp--preset--color--gris-oscuro);
+  --color-gris-claro: var(--wp--preset--color--gris-claro);
+  --color-blanco: var(--wp--preset--color--blanco);
+  --color-blanco-transparente: var(--wp--preset--color--blanco-transparente);
+  --color-negro-transparente: var(--wp--preset--color--negro-transparente);
+}
+
+.wp-block-cover.wheight {
+  height: 100vh;
+}
+.wp-block-cover.wheight .wp-block-cover__inner-container {
+  height: 100%;
+}
+.wp-block-cover.hextend {
+  height: 100%;
+}
+.wp-block-cover.hextend .wp-block-cover__inner-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wp-block-cover.hextend .wp-block-cover__inner-container .flexuno {
+  flex: 1;
+}
+.wp-block-cover.hextend .wp-block-cover__inner-container .wp-block-image.clampwidth img {
+  width: clamp(170px, 40vw, 300px) !important;
+}
+.wp-block-cover.hextend .wp-block-cover__inner-container .wp-block-image.vertcenter {
+  display: flex;
+  align-items: center;
+}
+
+strong {
+  font-weight: 700;
+}
+
 #PortfolioWrapper {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: var(--ast-global-color-7);
+  background-color: var(--color-negro-transparente);
   z-index: 100;
 }
 #PortfolioWrapper .Portfolio {
   position: absolute;
-  top: var(--s2);
-  right: var(--s2);
-  bottom: var(--s2);
-  left: var(--s2);
-  background-color: var(--ast-global-color-4);
+  top: var(--s05);
+  right: var(--s05);
+  bottom: var(--s05);
+  left: var(--s05);
+  background-color: var(--color-gris-claro);
   display: none;
 }
 #PortfolioWrapper .Portfolio .Loading {
@@ -489,7 +549,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  overflow: hidden;
   display: none;
 }
 #PortfolioWrapper .Portfolio .WP .Title {
@@ -503,21 +562,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--s2);
-  background-color: var(--ast-global-color-6);
+  padding: 0 var(--s15);
+  background-color: var(--color-gris-claro);
   z-index: 1;
-  box-shadow: 0 0 6px var(--ast-global-color-1);
+  box-shadow: 0 0 6px var(--color-negro);
+  box-sizing: border-box;
+}
+#PortfolioWrapper .Portfolio .WP .Title .Icon {
+  height: 80%;
+}
+#PortfolioWrapper .Portfolio .WP .Title .Icon img {
+  height: 100%;
+  display: block;
 }
 #PortfolioWrapper .Portfolio .WP .Title .Text {
   flex: 1;
-  color: var(--ast-global-color-1);
+  color: var(--color-gris-oscuro);
   font-weight: bold;
   font-size: 1.2rem;
+  margin-right: auto;
 }
 #PortfolioWrapper .Portfolio .WP .Title .Close {
   width: var(--s4);
   height: var(--s4);
-  color: var(--ast-global-color-1);
+  color: var(--color-gris-oscuro);
   cursor: pointer;
 }
 #PortfolioWrapper .Portfolio .WP .Title .Close img {
@@ -532,7 +600,6 @@
   left: 0;
   top: var(--s6);
   overflow: auto;
-  padding: var(--s4) 0 0 0;
   z-index: 0;
 }
 #PortfolioWrapper .Portfolio .WP .Content .wp-block-group.Header {
@@ -542,7 +609,7 @@
 }
 #PortfolioWrapper .Portfolio .WP .Content .Files {
   display: flex;
-  justify-content: space-between;
+  align-content: flex-start;
   flex-wrap: wrap;
 }
 #PortfolioWrapper .Portfolio .WP .Content .Files .File {
@@ -635,7 +702,7 @@
   bottom: 0;
   left: 0;
   z-index: 101;
-  background-color: var(--ast-global-color-4);
+  background-color: var(--color-blanco);
   display: none;
 }
 #ImageViewerWrapper #Images {
@@ -660,7 +727,7 @@
   right: var(--s2);
   width: var(--s4);
   height: var(--s4);
-  color: var(--ast-global-color-1);
+  color: var(--color-naranja);
   cursor: pointer;
   z-index: 1;
 }
