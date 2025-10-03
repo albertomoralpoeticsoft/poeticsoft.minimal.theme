@@ -39659,26 +39659,6 @@ if (false) // removed by dead control flow
 
 /***/ }),
 
-/***/ "./poeticsoft-minimal-theme/assets/images/2015.png":
-/*!*********************************************************!*\
-  !*** ./poeticsoft-minimal-theme/assets/images/2015.png ***!
-  \*********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "/assets/images/2015.png";
-
-/***/ }),
-
-/***/ "./poeticsoft-minimal-theme/assets/images/2015light.png":
-/*!**************************************************************!*\
-  !*** ./poeticsoft-minimal-theme/assets/images/2015light.png ***!
-  \**************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "/assets/images/2015light.png";
-
-/***/ }),
-
 /***/ "./poeticsoft-minimal-theme/assets/images/drop-alpha.png":
 /*!***************************************************************!*\
   !*** ./poeticsoft-minimal-theme/assets/images/drop-alpha.png ***!
@@ -40502,8 +40482,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/gsap-core.js");
 /* harmony import */ var assets_images_drop_alpha_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! assets/images/drop-alpha.png */ "./poeticsoft-minimal-theme/assets/images/drop-alpha.png");
 /* harmony import */ var assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! assets/images/drop-color.png */ "./poeticsoft-minimal-theme/assets/images/drop-color.png");
-/* harmony import */ var assets_images_2015_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! assets/images/2015.png */ "./poeticsoft-minimal-theme/assets/images/2015.png");
-/* harmony import */ var assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! assets/images/2015light.png */ "./poeticsoft-minimal-theme/assets/images/2015light.png");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'assets/images/2015.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'assets/images/2015light.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -40565,10 +40545,10 @@ var Texture2015WidthSlope = (Texture2015WidthTarget.y - Texture2015WidthStart.y)
     src: assets_images_drop_color_png__WEBPACK_IMPORTED_MODULE_7__
   }, {
     name: 'img2015',
-    src: assets_images_2015_png__WEBPACK_IMPORTED_MODULE_8__
+    src: Object(function webpackMissingModule() { var e = new Error("Cannot find module 'assets/images/2015.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
   }, {
     name: 'img2015light',
-    src: assets_images_2015light_png__WEBPACK_IMPORTED_MODULE_9__
+    src: Object(function webpackMissingModule() { var e = new Error("Cannot find module 'assets/images/2015light.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
   }]).then(function (images) {
     dropColor = images.dropColor.img;
     dropAlpha = images.dropAlpha.img;

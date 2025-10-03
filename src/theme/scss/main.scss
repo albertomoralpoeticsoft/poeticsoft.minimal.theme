@@ -1,4 +1,5 @@
 @use '~commonscss/mixin' as *;
+@use '~commonscss/main';
 
 html,
 body {
@@ -16,8 +17,9 @@ body {
   -ms-user-select: none;
 }
 
+.wp-site-blocks,
 #APP,
-.wp-site-blocks { 
+.entry-content.wp-block-post-content { 
 
   @include absolutebox();
   padding: 0;
@@ -29,14 +31,10 @@ body {
   z-index: 0; 
 }
 
-.wp-site-blocks {
+.entry-content.wp-block-post-content {
   
   overflow: auto;
   z-index: 1; 
-}
-
-.entry-content.wp-block-post-content {
-
-  overflow: auto;
-
+  background-color: transparent;
+  isolation: isolate;
 }

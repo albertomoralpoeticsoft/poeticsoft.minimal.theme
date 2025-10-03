@@ -12,16 +12,16 @@ add_action(
 
     $pageapps = [
       'clouds',
-      'rain2',
-      'fire',
-      'blur',
+      // 'rain2',
+      //'fire',
+      //'blur',
       'halo'
     ];
 
     if(null != $post) {
       
-      $appname = $pageapps[rand(0, count($pageapps) - 1)];
-      // $appname = $pageapps[0];
+      // $appname = $pageapps[rand(0, count($pageapps) - 1)];
+      $appname = $pageapps[0];
 
       wp_enqueue_script(
         'poeticsoft-theme-app-' . $appname, 

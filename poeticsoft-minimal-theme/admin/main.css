@@ -2,10 +2,6 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/admin/main.scss ***!
   \**************************************************************************************************************/
 /**************************************
-  MIXIN 
-***************************************
-*/
-/**************************************
   ROOT 
 ***************************************
 */
@@ -35,34 +31,65 @@
   --color-negro-transparente: var(--wp--preset--color--negro-transparente);
 }
 
-.wp-block-cover.wheight {
-  height: 100vh;
+.video-opacity-01 video {
+  opacity: 0.1;
 }
-.wp-block-cover.wheight .wp-block-cover__inner-container {
-  height: 100%;
+
+.video-opacity-02 video {
+  opacity: 0.2;
 }
-.wp-block-cover.hextend {
-  height: 100%;
+
+.video-opacity-03 video {
+  opacity: 0.3;
 }
-.wp-block-cover.hextend .wp-block-cover__inner-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+.video-opacity-04 video {
+  opacity: 0.4;
 }
-.wp-block-cover.hextend .wp-block-cover__inner-container .flexuno {
-  flex: 1;
+
+.video-opacity-05 video {
+  opacity: 0.5;
 }
-.wp-block-cover.hextend .wp-block-cover__inner-container .wp-block-image.clampwidth img {
-  width: clamp(170px, 40vw, 300px) !important;
+
+.video-opacity-06 video {
+  opacity: 0.6;
 }
-.wp-block-cover.hextend .wp-block-cover__inner-container .wp-block-image.vertcenter {
-  display: flex;
-  align-items: center;
+
+.video-opacity-07 video {
+  opacity: 0.7;
+}
+
+.video-opacity-08 video {
+  opacity: 0.8;
+}
+
+.video-opacity-09 video {
+  opacity: 0.9;
+}
+
+.video-opacity-10 video {
+  opacity: 1;
 }
 
 strong {
   font-weight: 700;
+}
+
+.wp-block-cover.HeroVideo {
+  height: 100vh;
+}
+.wp-block-cover.HeroVideo .wp-block-cover__inner-container {
+  height: 100%;
+}
+.wp-block-cover.HeroVideo .wp-block-cover__inner-container .wp-block-cover .wp-block-cover__background {
+  z-index: 0;
+}
+.wp-block-cover.HeroVideo .wp-block-cover__inner-container .wp-block-cover video.wp-block-cover__video-background {
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+.wp-block-cover.HeroVideo .wp-block-cover__inner-container .wp-block-cover .wp-block-cover__inner-container {
+  z-index: 2;
 }
 
 .editor-styles-wrapper {
