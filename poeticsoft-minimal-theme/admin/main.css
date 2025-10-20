@@ -71,12 +71,21 @@
   opacity: 1;
 }
 
+@media (max-width: 782px) {
+  .Res.S.Center {
+    text-align: center;
+  }
+}
+
 strong {
   font-weight: 700;
 }
 
 .wp-block-cover.HeroVideo {
   height: 100vh;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .wp-block-cover.HeroVideo .wp-block-cover__inner-container {
   height: 100%;
@@ -90,6 +99,22 @@ strong {
 }
 .wp-block-cover.HeroVideo .wp-block-cover__inner-container .wp-block-cover .wp-block-cover__inner-container {
   z-index: 2;
+}
+
+.wp-block-cover.Section {
+  height: 100vh;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.wp-block-cover.Section .wp-block-cover__inner-container {
+  height: 100%;
+}
+.wp-block-cover.Section .wp-block-cover__inner-container .wp-block-cover {
+  height: 100%;
+}
+.wp-block-cover.Section .wp-block-cover__inner-container .wp-block-cover .wp-block-group {
+  height: 100%;
 }
 
 .editor-styles-wrapper {

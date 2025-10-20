@@ -2,3 +2,17 @@
 @for $i from 1 through 10 {
   .video-opacity-#{if($i < 10, '0#{$i}', $i)} { video { opacity: $i / 10; } }
 }
+
+.Res { // Responsive
+
+  &.S { // Small ( Mobil)
+
+    @media (max-width: 782px) {
+
+      &.Center {
+
+        text-align: center;
+      }
+    }
+  }
+}

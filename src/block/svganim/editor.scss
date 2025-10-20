@@ -1,0 +1,16 @@
+@use './svganim';
+
+.wp-block-poeticsoft-svganim {
+
+  .SVG {
+
+    .ChangeSvg {
+
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}

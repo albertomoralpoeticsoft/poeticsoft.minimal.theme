@@ -3,19 +3,14 @@
   "version": "0.0.0",
   "license": "GPL-2.0-or-later",
   "scripts": {
-    
     "admindev": "webpack --env=admin-dev",
     "adminprod": "webpack --env=admin-prod",
-    
     "themedev": "webpack --env=theme-dev",
     "themeprod": "webpack --env=theme-prod",
-
     "portfoliodev": "webpack --env=portfolio-dev",
     "portfolioprod": "webpack --env=portfolio-prod",
-    
     "dialogdev": "webpack --env=dialog-dev",
     "dialogprod": "webpack --env=dialog-prod",
-
     "cloudsdev": "webpack --env=apps-clouds-dev",
     "cloudsprod": "webpack --env=apps-clouds-prod",
     "raindev": "webpack --env=apps-rain-dev",
@@ -29,7 +24,13 @@
     "rain2dev": "webpack --env=apps-rain2-dev",
     "rain2prod": "webpack --env=apps-rain2-prod",
     "halodev": "webpack --env=apps-halo-dev",
-    "haloprod": "webpack --env=apps-halo-prod"
+    "haloprod": "webpack --env=apps-halo-prod",
+    "svganimdev": "webpack --env=block-svganim-dev",
+    "svganimprod": "webpack --env=block-svganim-prod",
+    "svgtestdev": "webpack --env=svgscript-test-dev",
+    "svgtestprod": "webpack --env=svgscript-test-prod",
+    "svggeodev": "webpack --env=svgscript-geo-dev",
+    "svggeoprod": "webpack --env=svgscript-geo-prod"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",
@@ -43,7 +44,7 @@
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
     "glslify": "^7.1.1",
-    "gsap": "^3.12.7",
+    "gsap": "^3.13.0",
     "immutable-update": "^1.0.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.468.0",
@@ -59,6 +60,7 @@
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "three": "^0.172.0",
+    "uuid": "^13.0.0",
     "viewerjs": "^1.11.7"
   },
   "babel": {

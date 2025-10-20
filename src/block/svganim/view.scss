@@ -1,0 +1,25 @@
+@use './svganim';
+
+.wp-block-poeticsoft-svganim {  
+
+  margin-block-start: unset !important;
+  margin-block-end: unset !important; 
+
+  &.left {
+
+    margin-left: 0 !important;
+    margin-right: auto !important;    
+  }
+
+  &.center {
+
+    margin-left: auto !important;
+    margin-right: auto !important;    
+  }
+
+  &.right {
+
+    margin-left: auto !important;
+    margin-right: 0 !important;    
+  }
+}

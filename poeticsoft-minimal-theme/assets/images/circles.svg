@@ -1,0 +1,99 @@
+<svg 
+  width="100%" 
+  height="100%" 
+  viewPort="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <script 
+    type="application/ecmascript"
+  >
+    <![CDATA[
+
+      const svg = document.documentElement;
+      const ancho = 100;
+      const alto = 100;
+      const numCirculos = 50;
+      const circulos = [];
+      let mouse = {x: null, y: null};
+
+      // Función para generar colores HSL iniciales
+      function colorHSL(hue) {
+        return `hsl(${hue % 360}, 80%, 50%)`;
+      }
+
+      // Crear partículas
+      for (let i = 0; i < numCirculos; i++) {
+
+        const r = Math.random() * 8 + 5;
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("r", r);
+        c.setAttribute("cx", Math.random() * (ancho - 2*r) + r);
+        c.setAttribute("cy", Math.random() * (alto - 2*r) + r);
+        c.setAttribute("fill", colorHSL(Math.random() * 360));
+        svg.appendChild(c);
+
+        circulos.push({
+          el: c,
+          x: parseFloat(c.getAttribute("cx")),
+          y: parseFloat(c.getAttribute("cy")),
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          hue: Math.random() * 360
+        });
+      }
+
+      // Detectar posición del mouse
+      svg.addEventListener(
+        "mousemove", 
+        e => {
+          mouse.x = e.offsetX;
+          mouse.y = e.offsetY;
+        }
+      );
+      svg.addEventListener(
+        "mouseleave", 
+        () => {
+          mouse.x = null;
+          mouse.y = null;
+        }
+      );
+
+      // Animación
+      function animar() {
+
+        circulos.forEach(c => {
+          // Movimiento base
+          c.x += c.vx;
+          c.y += c.vy;
+
+          // Rebote en bordes
+          if (c.x - c.el.r.baseVal.value < 0 || c.x + c.el.r.baseVal.value > ancho) c.vx *= -1;
+          if (c.y - c.el.r.baseVal.value < 0 || c.y + c.el.r.baseVal.value > alto) c.vy *= -1;
+
+          // Interacción con el mouse (atracción/repulsión)
+          if (mouse.x !== null && mouse.y !== null) {
+            const dx = mouse.x - c.x;
+            const dy = mouse.y - c.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 100) { // radio de influencia
+              const force = (100 - dist)/100 * 0.5;
+              c.vx += dx * force * 0.01;
+              c.vy += dy * force * 0.01;
+            }
+          }
+
+          // Cambio gradual de color
+          c.hue += 0.5;
+          c.el.setAttribute("fill", colorHSL(c.hue));
+
+          c.el.setAttribute("cx", c.x);
+          c.el.setAttribute("cy", c.y);
+        });
+
+        requestAnimationFrame(animar);
+      }
+
+      animar();
+    ]]>
+  </script>
+</svg>

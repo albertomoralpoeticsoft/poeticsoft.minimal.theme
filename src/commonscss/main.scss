@@ -2,41 +2,4 @@
 @use './classes';
 @use './common';
 @use './herovideo';
-
-// .wp-block-cover {
-  
-//   &.wheight {
-
-//     height: 100vh;
-
-//     .wp-block-cover__inner-container {
-
-//       height: 100%
-//     }
-//   }
-
-//   &.hextend {
-
-//     height: 100%;
-
-//     .wp-block-cover__inner-container {
-
-//       height: 100%;
-
-//       display: flex;
-//       // flex-direction: column;
-//       // justify-content: space-between;
-
-//       .flexuno {
-
-//         flex: 1;
-//       }
-
-//       .wp-block-image.vertcenter {
-
-//         display: flex;
-//         align-items: center;
-//       }
-//     }
-//   }
-// }
+@use './section';

@@ -1,0 +1,22 @@
+.wp-block-cover.Section {
+
+  height: 100vh;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+
+  .wp-block-cover__inner-container {
+
+    height: 100%;
+
+    .wp-block-cover {
+
+      height: 100%;   
+      
+      .wp-block-group {
+
+        height: 100%;
+      }
+    }
+  }
+}

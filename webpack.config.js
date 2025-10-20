@@ -16,7 +16,15 @@ module.exports = env => {
   let unit, mode
   let paths = {
     public: themeplublic,
-    cssfilename: 'main.css'
+    cssfilename: '[name].css'
+  }
+  let entry = {}
+  let externals = {}  
+
+  const wpexternals = {
+    '@wordpress/element': 'wp.element',
+    '@wordpress/i18n': 'wp.i18n',
+    '@wordpress/blocks': 'wp.blocks'
   }
 
   switch(type) {
@@ -27,17 +35,52 @@ module.exports = env => {
       unit = params[1] || 'clouds' // clouds | rain | fire | 
       mode = params[2] || 'dev' // dev | prod
       
-      paths.entryjs = './src/' + type + '/' + unit + '/main.js',
       paths.output = destdir  + '/' + type + '/' + unit
+      
+      entry = {
+        main: './src/' + type + '/' + unit + '/main.js'
+      }
+
+      break
+
+    case 'block':
+
+      unit = params[1] || 'gallery' // gallery 
+      mode = params[2] || 'dev' // dev | prod
+      
+      paths.output = destdir  + '/' + type + '/' + unit + '/build'
+
+      entry = {
+        editor: './src/' + type + '/' + unit + '/editor.js',
+        view: './src/' + type + '/' + unit + '/view.js'
+      }
+
+      externals = wpexternals
+
+      break
+
+    case 'svgscript':
+
+      unit = params[1] || 'test' // test 
+      mode = params[2] || 'dev' // dev | prod
+      
+      paths.output = destdir  + '/' + type + '/' + unit 
+
+      entry = {
+        main: './src/' + type + '/' + unit + '/main.js'
+      }
 
       break
 
     default:
 
       mode = params[1] || 'dev' // dev | prod
-      
-      paths.entryjs = './src/' + type + '/main.js',
+
       paths.output = destdir  + '/' + type
+      
+      entry = {
+        main: './src/' + type + '/main.js'
+      }
 
       break
   }  
@@ -47,9 +90,7 @@ module.exports = env => {
     stats: 'minimal',
     watch: true,
     name: 'minimal',
-    entry: {
-      main: paths.entryjs
-    },
+    entry: entry,
     output: {
       path: paths.output,
       publicPath: paths.public
@@ -124,7 +165,9 @@ module.exports = env => {
         themescss: path.join(__dirname, 'src/theme/scss'),
         commonjs: path.join(__dirname, 'src/commonjs'),
         commonscss: path.join(__dirname, 'src/commonscss'),
-        assets: path.resolve(destdir + '/assets')
+        assets: path.resolve(destdir + '/assets'),       
+        block: path.join(__dirname, themename, 'block'),       
+        styles: path.join(__dirname, 'src', 'styles')
       }
     }
   }

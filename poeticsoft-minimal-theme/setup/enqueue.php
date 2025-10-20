@@ -15,7 +15,10 @@ add_action(
     wp_enqueue_style( 
       'poeticsoft-theme-admin',
       get_stylesheet_directory_uri() . '/admin/main.css', 
-      [], 
+      [
+        'wp-block-library',
+        'wp-block-library-theme'
+      ], 
       filemtime(get_stylesheet_directory() . '/admin/main.css'),
       'all' 
     );
@@ -45,16 +48,28 @@ add_action(
       [], 
       filemtime(get_stylesheet_directory() . '/editor/controls/main.css'),
       'all' 
-    ); 
-    
+    );
+
     */
 	}, 
 	15 
 );
 
+add_action(
+  'enqueue_block_editor_assets', 
+  function () {
+    
+    wp_enqueue_style('wp-block-library');
+    wp_enqueue_style('wp-block-library-theme');
+  }
+);
+
 add_action( 
 	'wp_enqueue_scripts', 
 	function () {
+    
+    wp_enqueue_style('wp-block-library'); 
+    wp_enqueue_style('wp-block-library-theme');
 
     // Theme
 
@@ -69,7 +84,10 @@ add_action(
     wp_enqueue_style( 
       'poeticsoft-theme-theme',
       get_stylesheet_directory_uri() . '/theme/main.css', 
-      [], 
+      [
+        'wp-block-library',
+        'wp-block-library-theme'
+      ], 
       filemtime(get_stylesheet_directory() . '/theme/main.css'),
       'all' 
     );

@@ -1,5 +1,30 @@
 <?php
 
+function poeticsoft_minimaltheme_svgscripts(WP_REST_Request $req) {
+
+  $res = new WP_REST_Response();
+
+  try {
+
+    $scriptsdir = get_stylesheet_directory() . '/svgscript';
+    $scripts = array_values(
+      array_diff(
+        scandir($scriptsdir),
+        ['..', '.']
+      )
+    );
+    
+    $res->set_data($scripts);
+    
+  } catch (Exception $e) {
+    
+    $res->set_status($e->getCode());
+    $res->set_data($e->getMessage());
+  }
+
+  return $res;
+}
+
 function poeticsoft_minimaltheme_page(WP_REST_Request $req) {
 
   $res = new WP_REST_Response();
@@ -36,6 +61,18 @@ function poeticsoft_minimaltheme_page(WP_REST_Request $req) {
 add_action(
   'rest_api_init',
   function () {
+
+    register_rest_route(
+      'minimaltheme',
+      'svgscripts',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => 'poeticsoft_minimaltheme_svgscripts',
+          'permission_callback' => '__return_true'
+        )
+      )
+    );
 
     register_rest_route(
       'minimaltheme',
