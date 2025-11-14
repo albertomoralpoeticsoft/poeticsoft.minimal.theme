@@ -17214,28 +17214,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./src/svgscript/common/inviewport.js":
-/*!********************************************!*\
-  !*** ./src/svgscript/common/inviewport.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   observesvg: () => (/* binding */ observesvg)
-/* harmony export */ });
-var observesvg = function observesvg(svg, setRunning, animar) {
-  var observer = new IntersectionObserver(function (entries) {
-    setRunning(entries[0].isIntersecting);
-    entries[0].isIntersecting && animar();
-  }, {
-    threshold: 0.5
-  }).observe(svg);
-};
-
-/***/ }),
-
 /***/ "./src/svgscript/common/utils.js":
 /*!***************************************!*\
   !*** ./src/svgscript/common/utils.js ***!
@@ -17245,10 +17223,16 @@ var observesvg = function observesvg(svg, setRunning, animar) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createCursor: () => (/* binding */ createCursor),
 /* harmony export */   followMouse: () => (/* binding */ followMouse),
-/* harmony export */   rotateLine: () => (/* binding */ rotateLine),
-/* harmony export */   rotatePoint: () => (/* binding */ rotatePoint)
+/* harmony export */   inertia: () => (/* binding */ inertia),
+/* harmony export */   mousedc: () => (/* binding */ mousedc),
+/* harmony export */   mousemove: () => (/* binding */ mousemove),
+/* harmony export */   polarPosition: () => (/* binding */ polarPosition),
+/* harmony export */   rectangle: () => (/* binding */ rectangle),
+/* harmony export */   rotateLine: () => (/* binding */ rotateLine)
 /* harmony export */ });
+var svgns = "http://www.w3.org/2000/svg";
 var angle = function angle(a) {
   return a * Math.PI / 180;
 };
@@ -17256,7 +17240,7 @@ var followMouse = function followMouse(item, mouse, k) {
   item.cx = item.cx + (mouse.x - item.cx) * k;
   item.cy = item.cy + (mouse.y - item.cy) * k;
 };
-var rotatePoint = function rotatePoint(center, radio, r) {
+var polarPosition = function polarPosition(center, radio, r) {
   var theta = angle(r);
   var x = center.x + radio * Math.cos(theta);
   var y = center.y + radio * Math.sin(theta);
@@ -17277,6 +17261,55 @@ var rotateLine = function rotateLine(item, radio, r) {
     x2: x2,
     y2: y2
   };
+};
+var inertia = function inertia(follower, value, friction) {
+  return follower + (value - follower) * friction;
+};
+var createCursor = function createCursor(svg) {
+  var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#000';
+  var stroke = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.2;
+  var opacity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.5;
+  console.log(color);
+  var cursor = document.createElementNS(svgns, 'circle');
+  cursor.setAttribute('cx', 0);
+  cursor.setAttribute('cy', 0);
+  cursor.setAttribute('r', 0);
+  cursor.setAttribute('fill', 'none');
+  cursor.setAttribute('stroke', color);
+  cursor.setAttribute('stroke-width', stroke);
+  cursor.setAttribute('opacity', opacity);
+  svg.appendChild(cursor);
+  return cursor;
+};
+var rectangle = function rectangle() {
+  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#000';
+  var stroke = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.2;
+  var opacity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.5;
+  var rect = document.createElementNS(svgns, 'rect');
+  rect.setAttribute('x', 0);
+  rect.setAttribute('y', 0);
+  rect.setAttribute('height', 0);
+  rect.setAttribute('fill', 'none');
+  rect.setAttribute('stroke', color);
+  rect.setAttribute('stroke-width', stroke);
+  rect.setAttribute('opacity', opacity);
+  rect.setAttribute('rx', 4);
+  rect.setAttribute('ry', 4);
+  return rect;
+};
+var mousemove = function mousemove(svg, mouse) {
+  document.addEventListener('mousemove', function (e) {
+    if (e.target.tagName == 'svg') {
+      var svgBox = svg.getBoundingClientRect();
+      mouse.x = e.offsetX * 100 / svgBox.width;
+      mouse.y = e.offsetY * 100 / svgBox.height;
+    }
+  });
+};
+var mousedc = function mousedc(svgc, mouse) {
+  var dx = mouse.x - svgc.x;
+  var dy = mouse.y - svgc.y;
+  return Math.sqrt(dx * dx + dy * dy) / 50;
 };
 
 /***/ })
@@ -17377,82 +17410,76 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ./src/svgscript/geo/main.js ***!
-  \***********************************/
+/*!**************************************!*\
+  !*** ./src/svgscript/spiral/main.js ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_inviewport__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/inviewport */ "./src/svgscript/common/inviewport.js");
-/* harmony import */ var _common_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../common/utils */ "./src/svgscript/common/utils.js");
-// http://snapsvg.io/about/
-
-
+/* harmony import */ var _common_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/utils */ "./src/svgscript/common/utils.js");
 
 
 var script = document.currentScript;
 var svgid = script.getAttribute('data-svgid');
+var color = script.getAttribute('data-color');
 var svg = document.getElementById('svg_' + svgid);
-var running = true;
-var lado = 100;
-var rad = 1.4142 * lado;
-var opaco = 1;
-var itemscount = 100;
-var items = [];
-var mouse = {
+var svgc = {
   x: 50,
   y: 50
 };
+var mouse = {
+  x: 0,
+  y: 0
+};
+(0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.mousemove)(svg, mouse);
+var cursor = (0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.createCursor)(svg);
+var OCA = 100;
+var OA = [];
+(0,lodash__WEBPACK_IMPORTED_MODULE_0__.times)(OCA, function (index) {
+  var o = (0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.rectangle)(color);
+  svg.appendChild(o);
+  OA.push({
+    w: 30,
+    h: 30,
+    rad: 20,
+    r: 0,
+    i: 0,
+    o: o
+  });
+});
 var a = 0;
-var r = 360 / itemscount;
-(0,lodash__WEBPACK_IMPORTED_MODULE_0__.times)(itemscount, function (index) {
-  var c = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-  c.setAttribute('stroke', '#000000');
-  c.setAttribute('stroke-width', 1);
-  svg.appendChild(c);
-  items.push({
-    e: c,
-    cx: 0,
-    cy: 0,
-    rs: 0.5,
-    r: 360 / itemscount * index
+var inca = 0.6;
+function animate() {
+  a = (a - inca) % 360;
+  var dc = (0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.mousedc)(svgc, mouse);
+  cursor.setAttribute('cx', mouse.x);
+  cursor.setAttribute('cy', mouse.y);
+  cursor.setAttribute('r', Math.min(1 / dc, 10));
+  cursor.setAttribute('opacity', 1 - dc);
+  (0,lodash__WEBPACK_IMPORTED_MODULE_0__.times)(OCA, function (index) {
+    var obj = OA[index];
+    var ang = 360 / OCA * index;
+    var anginc = (ang + a) % 360;
+    obj.r = (obj.r + 0.5) % 360;
+    obj.i = (0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.inertia)(obj.i, dc, 0.05);
+    var w = obj.w * (obj.i + 0.1);
+    var h = obj.h * (obj.i + 0.1);
+    var rx = obj.i * 6;
+    var ry = obj.i * 6;
+    var pos = (0,_common_utils__WEBPACK_IMPORTED_MODULE_1__.polarPosition)(svgc, obj.rad, anginc);
+    var posx = pos.x - w / 2;
+    var posy = pos.y - h / 2;
+    obj.o.setAttribute('x', posx);
+    obj.o.setAttribute('y', posy);
+    obj.o.setAttribute('width', w);
+    obj.o.setAttribute('height', w);
+    obj.o.setAttribute('rx', rx);
+    obj.o.setAttribute('ry', ry);
+    obj.o.setAttribute('transform', "rotate(\n          ".concat(obj.r, " \n          ").concat(pos.x, " \n          ").concat(pos.y, "\n        )"));
   });
-});
-var _animar = function animar() {
-  a = (a + r) % 360;
-  (0,lodash__WEBPACK_IMPORTED_MODULE_0__.times)(itemscount, function (index) {
-    var item = items[index];
-    var pr = (0,_common_utils__WEBPACK_IMPORTED_MODULE_2__.rotatePoint)({
-      x: 50,
-      y: 50
-    }, lado / 8, a);
-    var friction = (1 / (itemscount + 1) + index / itemscount) / 10;
-    (0,_common_utils__WEBPACK_IMPORTED_MODULE_2__.followMouse)(item, mouse, friction); //index / itemscount);
-
-    item.r = (item.r + item.rs) % 360;
-    var rline = (0,_common_utils__WEBPACK_IMPORTED_MODULE_2__.rotateLine)(item, rad, item.r);
-    item.e.setAttribute('x1', rline.x1 + '%');
-    item.e.setAttribute('x2', rline.x2 + '%');
-    item.e.setAttribute('y1', rline.y1 + '%');
-    item.e.setAttribute('y2', rline.y2 + '%');
-  });
-  if (running) {
-    requestAnimationFrame(_animar);
-  }
-};
-svg.addEventListener('mousemove', function (e) {
-  var svgBox = svg.getBoundingClientRect();
-  mouse.x = e.offsetX * 100 / svgBox.width;
-  mouse.y = e.offsetY * 100 / svgBox.height;
-});
-svg.addEventListener('mouseleave', function () {
-  mouse.x = mouse.x;
-  mouse.y = mouse.y;
-});
-var setRunning = function setRunning(r) {
-  running = r;
-};
-(0,_common_inviewport__WEBPACK_IMPORTED_MODULE_1__.observesvg)(svg, setRunning, _animar);
+  requestAnimationFrame(animate);
+}
+animate();
 })();
 
 /******/ })()

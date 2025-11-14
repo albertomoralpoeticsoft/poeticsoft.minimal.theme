@@ -9,39 +9,40 @@
 defined( 'ABSPATH' ) || exit;
 
 $block_id = $attributes['blockId'];
+$color = $attributes['color'];
 $svgscript  = $attributes['svgscript'];
-$minWidth = $attributes['minWidth'];
 $width = $attributes['width'];
 $minWidth = $attributes['minWidth'];
 $maxWidth = $attributes['maxWidth'];
-$className = $attributes['className'];
-$classAlign = $attributes['align'];
+$classAlign = array_key_exists('align', $attributes) ? $attributes['align'] : '';
 
 $wrapper_attributes = get_block_wrapper_attributes([
-  'class' => 'svg-anim-wrapper'
-]);
-
-echo '<div>' . json_encode($wrapper_attributes) . '</div><div
-  id="' . $block_id . '"
-  class="wp-block wp-block-poeticsoft-svganim ' . $className . ' ' . $classAlign . '"
-  style="
+  'class' => $classAlign,
+  'style' => '
     width: clamp('. $minWidth . 'px, '. $width . '%, '. $maxWidth . 'px); 
     padding: 0px 0px clamp('. $minWidth . 'px, '. $width . '%, '. $maxWidth . 'px);
     position: relative;
-  "
->
+    overflow: hidden;
+  '
+]);
+
+echo '<div 
+  id="' . $block_id . '" ' .
+  $wrapper_attributes .
+'>
   <div class="SVG">
     <svg 
-      id={ blockId }
+      id="svg_' . $block_id . '"
       width="100%" 
       height="100%" 
-      viewPort="0 0 100 100"
+      viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
     >
       <script 
         type="application/ecmascript"
         href="/wp-content/themes/poeticsoft-minimal-theme/svgscript/' . $svgscript . '/main.js"
-        data-svgid={ blockId }
+        data-svgid=' . $block_id . '
+        data-color=' . $color . '
       ></script>
     </svg>
   </div>

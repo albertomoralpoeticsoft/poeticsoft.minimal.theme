@@ -4,12 +4,15 @@ const {
 } = wp.blocks
 const { 
   useBlockProps,
-  InspectorControls
+  InspectorControls,
+  MediaUpload
 } = wp.blockEditor
 const { 
   PanelBody,
   RangeControl,
-  SelectControl
+  SelectControl,
+  ColorPicker,
+  Button 
 } = wp.components
 const {
   apiFetch
@@ -35,9 +38,16 @@ const Edit = props => {
     width,
     minWidth,
     maxWidth,
-    velocity
+    cursorid,
+    cursorurl,
+    color
   } = attributes
-  const blockProps = useBlockProps()
+  const blockProps = useBlockProps({
+    style: {
+      width: `clamp(${minWidth}px, ${width}%, ${maxWidth}px)`, 
+      padding: `0 0 clamp(${minWidth}px, ${width}%, ${maxWidth}px) 0`
+    }
+  })
   const [ scripts, setScripts ] = useState([])
 
   const selectScript = script => {
@@ -53,6 +63,24 @@ const Edit = props => {
       })
     }, 50)
   }
+
+  useEffect(() => {
+
+    const actsvgscript = svgscript
+
+    setAttributes({ 
+      svgscript: null 
+    })
+
+    setTimeout(() => {
+    
+      setAttributes({ 
+        svgscript: actsvgscript 
+      })
+
+    }, 1)
+
+  }, [color])
 
   useEffect(() => {
 
@@ -83,12 +111,7 @@ const Edit = props => {
   }, [])
 
   return <div
-    { ...blockProps }
-    style={{ 
-      ...blockProps.style,
-      width: `clamp(${minWidth}px, ${width}%, ${maxWidth}px)`, 
-      padding: `0 0 clamp(${minWidth}px, ${width}%, ${maxWidth}px) 0`
-    }}
+    { ...blockProps }   
   >
     <InspectorControls>
       <PanelBody 
@@ -103,6 +126,47 @@ const Edit = props => {
           value={ svgscript }
           options={ scripts }
           onChange={ selectScript }
+        />
+      </PanelBody>
+      <PanelBody 
+        title="Mouse Cursor" 
+        initialOpen={ true }
+      >        
+        <MediaUpload
+          onSelect={ 
+            media => setAttributes({
+              cursorid: media.id,
+              cursorurl: media.url
+            }) 
+          }
+          allowedTypes={[
+            'image/png'
+          ]}
+          value={ cursorid }
+          render={({ open }) => (
+            <Button  
+              isPrimary
+              onClick={ 
+              () => {
+                
+                const frame = wp.media.frames.file_frame;
+                open();
+                setTimeout(() => {
+                  try {
+                    wp.media.frame.content.mode('browse');
+                  } catch (e) {}
+                }, 50);
+              }
+            }
+            >
+              {
+                cursorid ?
+                'Change cursor'
+                :
+                'Select cursor'
+              }
+            </Button>
+          )}
         />
       </PanelBody>
       <PanelBody 
@@ -142,16 +206,14 @@ const Edit = props => {
           min={ 20}
           max={ 1600 }
         />
-        <RangeControl
-          label="Transición"
-          value={ velocity }
+        <ColorPicker
+          color={ color }
           onChange={ 
             value => setAttributes({ 
-              velocity: value 
+              color: value 
             }) 
           }
-          min={ 1000}
-          max={ 10000 }
+          defaultValue={ color }
         />
       </PanelBody>
     </InspectorControls>
@@ -161,16 +223,17 @@ const Edit = props => {
         svgscript != '' ?
         <>
           <svg 
-            id={ blockId }
+            id={ 'svg_' + blockId }
             width="100%" 
             height="100%" 
-            viewPort="0 0 100 100"
+            viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
           >
             <script 
               type="application/ecmascript"
               href={ `/wp-content/themes/poeticsoft-minimal-theme/svgscript/${ svgscript }/main.js` }
               data-svgid={ blockId }
+              data-color={ color }
             ></script>
           </svg>
         </>   
@@ -186,6 +249,7 @@ const Save = () => null
 registerBlockType(
   metadata.name,
   {
+    ...metadata,
     edit: Edit,
     save: Save
   }

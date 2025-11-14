@@ -1,5 +1,7 @@
 <?php
 
+// https://nickdiego.com/how-to-modify-block-supports-using-client-side-filters/
+
 add_action(
   'init',
   function() {
@@ -37,10 +39,6 @@ add_action(
     remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10);
 
     add_filter('embed_oembed_discover', '__return_false');
-
-    add_theme_support('wp-block-styles');
-    add_theme_support('align-wide');
-    add_theme_support('editor-styles');
     
     add_filter(
       'upload_mimes', 

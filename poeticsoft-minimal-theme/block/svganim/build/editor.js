@@ -182,7 +182,7 @@ function validate(uuid) {
   \***********************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"poeticsoft/svganim","title":"Svg Anim","category":"poeticsoft","icon":"media-archive","description":"Animaciones algoritmicas svg.","keywords":[],"textdomain":"poeticsoft","version":"1.0.0","supports":{"align":["left","center","right"],"anchor":false,"customClassName":true,"className":true,"html":false,"border":true,"spacing":{"margin":true,"padding":true},"dimensions":{"minHeight":true,"width":true}},"attributes":{"blockId":{"type":"string","default":""},"svgscript":{"type":"string"},"minWidth":{"type":"number","default":20},"width":{"type":"number","default":20},"maxWidth":{"type":"number","default":2000}},"editorScript":"file:./build/editor.js","editorStyle":"file:./build/editor.css","viewScript":"file:./build/view.js","viewStyle":"file:./build/view.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"poeticsoft/svganim","title":"Svg Anim","category":"poeticsoft","icon":"media-archive","description":"Animaciones algoritmicas svg.","keywords":[],"textdomain":"poeticsoft","version":"1.0.0","supports":{"align":["left","center","right"],"anchor":false,"customClassName":true,"className":true,"html":false,"__experimentalBorder":{"color":true,"radius":true,"style":true,"width":true},"border":{"color":true,"radius":true,"style":true,"width":true},"spacing":{"margin":true,"padding":true},"dimensions":{"minHeight":true,"width":true}},"attributes":{"blockId":{"type":"string","default":""},"svgscript":{"type":"string"},"minWidth":{"type":"number","default":20},"width":{"type":"number","default":20},"maxWidth":{"type":"number","default":2000},"color":{"type":"string","default":"#000"},"cursorid":{"type":"number","default":null},"cursorurl":{"type":"string","default":null}},"editorScript":"file:./build/editor.js","editorStyle":"file:./build/editor.css","viewScript":"file:./build/view.js","viewStyle":"file:./build/view.css","render":"file:./render.php"}');
 
 /***/ }),
 
@@ -265,7 +265,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.scss */ "./src/block/svganim/editor.scss");
 /* harmony import */ var block_svganim_block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! block/svganim/block.json */ "./poeticsoft-minimal-theme/block/svganim/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -281,11 +280,14 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var registerBlockType = wp.blocks.registerBlockType;
 var _wp$blockEditor = wp.blockEditor,
   useBlockProps = _wp$blockEditor.useBlockProps,
-  InspectorControls = _wp$blockEditor.InspectorControls;
+  InspectorControls = _wp$blockEditor.InspectorControls,
+  MediaUpload = _wp$blockEditor.MediaUpload;
 var _wp$components = wp.components,
   PanelBody = _wp$components.PanelBody,
   RangeControl = _wp$components.RangeControl,
-  SelectControl = _wp$components.SelectControl;
+  SelectControl = _wp$components.SelectControl,
+  ColorPicker = _wp$components.ColorPicker,
+  Button = _wp$components.Button;
 var _wp = wp,
   apiFetch = _wp.apiFetch;
 var _wp$element = wp.element,
@@ -301,8 +303,15 @@ var Edit = function Edit(props) {
     width = attributes.width,
     minWidth = attributes.minWidth,
     maxWidth = attributes.maxWidth,
-    velocity = attributes.velocity;
-  var blockProps = useBlockProps();
+    cursorid = attributes.cursorid,
+    cursorurl = attributes.cursorurl,
+    color = attributes.color;
+  var blockProps = useBlockProps({
+    style: {
+      width: "clamp(".concat(minWidth, "px, ").concat(width, "%, ").concat(maxWidth, "px)"),
+      padding: "0 0 clamp(".concat(minWidth, "px, ").concat(width, "%, ").concat(maxWidth, "px) 0")
+    }
+  });
   var _useState = useState([]),
     _useState2 = _slicedToArray(_useState, 2),
     scripts = _useState2[0],
@@ -317,6 +326,17 @@ var Edit = function Edit(props) {
       });
     }, 50);
   };
+  useEffect(function () {
+    var actsvgscript = svgscript;
+    setAttributes({
+      svgscript: null
+    });
+    setTimeout(function () {
+      setAttributes({
+        svgscript: actsvgscript
+      });
+    }, 1);
+  }, [color]);
   useEffect(function () {
     if (!attributes.blockId) {
       setAttributes({
@@ -337,12 +357,7 @@ var Edit = function Edit(props) {
       })));
     });
   }, []);
-  return /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
-    style: _objectSpread(_objectSpread({}, blockProps.style), {}, {
-      width: "clamp(".concat(minWidth, "px, ").concat(width, "%, ").concat(maxWidth, "px)"),
-      padding: "0 0 clamp(".concat(minWidth, "px, ").concat(width, "%, ").concat(maxWidth, "px) 0")
-    })
-  }), /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: "SVG Scripts",
     initialOpen: true
   }, /*#__PURE__*/React.createElement(SelectControl, {
@@ -353,6 +368,33 @@ var Edit = function Edit(props) {
     value: svgscript,
     options: scripts,
     onChange: selectScript
+  })), /*#__PURE__*/React.createElement(PanelBody, {
+    title: "Mouse Cursor",
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(media) {
+      return setAttributes({
+        cursorid: media.id,
+        cursorurl: media.url
+      });
+    },
+    allowedTypes: ['image/png'],
+    value: cursorid,
+    render: function render(_ref) {
+      var open = _ref.open;
+      return /*#__PURE__*/React.createElement(Button, {
+        isPrimary: true,
+        onClick: function onClick() {
+          var frame = wp.media.frames.file_frame;
+          open();
+          setTimeout(function () {
+            try {
+              wp.media.frame.content.mode('browse');
+            } catch (e) {}
+          }, 50);
+        }
+      }, cursorid ? 'Change cursor' : 'Select cursor');
+    }
   })), /*#__PURE__*/React.createElement(PanelBody, {
     title: "Tama\xF1o",
     initialOpen: true
@@ -386,37 +428,36 @@ var Edit = function Edit(props) {
     },
     min: 20,
     max: 1600
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: "Transici\xF3n",
-    value: velocity,
+  }), /*#__PURE__*/React.createElement(ColorPicker, {
+    color: color,
     onChange: function onChange(value) {
       return setAttributes({
-        velocity: value
+        color: value
       });
     },
-    min: 1000,
-    max: 10000
+    defaultValue: color
   }))), /*#__PURE__*/React.createElement("div", {
     className: "SVG"
   }, svgscript && svgscript != '' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
-    id: blockId,
+    id: 'svg_' + blockId,
     width: "100%",
     height: "100%",
-    viewPort: "0 0 100 100",
+    viewBox: "0 0 100 100",
     xmlns: "http://www.w3.org/2000/svg"
   }, /*#__PURE__*/React.createElement("script", {
     type: "application/ecmascript",
     href: "/wp-content/themes/poeticsoft-minimal-theme/svgscript/".concat(svgscript, "/main.js"),
-    "data-svgid": blockId
+    "data-svgid": blockId,
+    "data-color": color
   }))) : /*#__PURE__*/React.createElement(React.Fragment, null)));
 };
 var Save = function Save() {
   return null;
 };
-registerBlockType(block_svganim_block_json__WEBPACK_IMPORTED_MODULE_2__.name, {
+registerBlockType(block_svganim_block_json__WEBPACK_IMPORTED_MODULE_2__.name, _objectSpread(_objectSpread({}, block_svganim_block_json__WEBPACK_IMPORTED_MODULE_2__), {}, {
   edit: Edit,
   save: Save
-});
+}));
 })();
 
 /******/ })()

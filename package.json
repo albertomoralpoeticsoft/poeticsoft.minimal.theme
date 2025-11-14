@@ -30,7 +30,11 @@
     "svgtestdev": "webpack --env=svgscript-test-dev",
     "svgtestprod": "webpack --env=svgscript-test-prod",
     "svggeodev": "webpack --env=svgscript-geo-dev",
-    "svggeoprod": "webpack --env=svgscript-geo-prod"
+    "svggeoprod": "webpack --env=svgscript-geo-prod",
+    "svgpatterndev": "webpack --env=svgscript-pattern-dev",
+    "svgpatternprod": "webpack --env=svgscript-pattern-prod",
+    "svgspiraldev": "webpack --env=svgscript-spiral-dev",
+    "svgflockdev": "webpack --env=svgscript-flock-dev"
   },
   "dependencies": {
     "@babel/core": "^7.18.10",

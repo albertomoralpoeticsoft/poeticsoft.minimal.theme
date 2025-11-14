@@ -8,7 +8,7 @@ function theme_log($display) {
   $text = is_string($display) ? $display : json_encode($display, JSON_PRETTY_PRINT);
 
   file_put_contents(
-    WP_CONTENT_DIR . '/core_log.txt',
+    WP_CONTENT_DIR . '/theme_log.txt',
     $text . PHP_EOL,
     FILE_APPEND
   );
